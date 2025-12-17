@@ -19,7 +19,7 @@ export default function ETHDepositPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#2C2C2C] p-4 py-6 md:p-4">
       <div className="w-full max-w-2xl bg-white rounded-[28px] md:rounded-[32px] px-6 py-6 md:px-12 md:py-8 shadow-2xl animate-scale-in">
-        <div className="relative p-6">
+        <div className="relative hidden p-6 sm:block">
           <button
             onClick={() => router.back()}
             className="absolute flex items-center justify-center w-10 h-10 font-bold transition-colors -translate-y-1/2 rounded-full left-6 top-1/2"
@@ -30,21 +30,29 @@ export default function ETHDepositPage() {
             Send ETH to the address below
           </h1>
         </div>
+        <div className="flex flex-col px-6 space-y-2 items sm:hidden">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center justify-start w-10 h-10 font-bold transition-colors rounded-full"
+          >
+            <ArrowLeftIcon className="text-gray-700 w-7 h-7" />
+          </button>
+          <h1 className="text-lg font-semibold text-nova">Send ETH to the address below</h1>
+        </div>
 
         <div className="p-6 space-y-6">
           <div className="flex justify-center">
-            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-[#CCF6E5] bg-[#E6FBF2] rounded-full text-nova text-base font-medium">
+            <div className="inline-flex items-center gap-3 px-5 py-3 border-2 border-[#CCF6E5] bg-[#E6FBF2] rounded-full text-nova text-base font-medium shrink-0">
               <span className="">{address}</span>
-              <button
-                onClick={() => handleCopy(address, 'address')}
-                className="flex items-center justify-center w-8 h-8 transition-colors"
-              >
-                <CopyIcon className="w-5 h-5 " />
-              </button>
-              {copied === 'address' && (
-                <span className="absolute mt-16 text-xs font-medium text-teal-600 animate-fade-in">
-                  Copied!
-                </span>
+              {copied === 'address' ? (
+                <span className="text-xs font-medium text-nova whitespace-nowrap">Copied!</span>
+              ) : (
+                <button
+                  onClick={() => handleCopy(address, 'address')}
+                  className="flex items-center justify-center w-8 h-8 transition-colors"
+                >
+                  <CopyIcon className="w-5 h-5 " />
+                </button>
               )}
             </div>
           </div>
@@ -54,16 +62,17 @@ export default function ETHDepositPage() {
               <span className="text-sm font-medium text-gray-600">Amount to send</span>
               <div className="flex items-center gap-2">
                 <span className="text-base font-semibold text-nova">{amount}</span>
-                <button
-                  onClick={() => handleCopy(amount, 'amount')}
-                  className="flex items-center justify-center w-8 h-8 transition-colors rounded-lg hover:bg-white"
-                >
-                  <CopyIcon className="w-5 h-5 text-nova" />
-                </button>
-                {copied === 'amount' && (
-                  <span className="absolute text-xs font-medium text-teal-600 right-12 animate-fade-in">
+                {copied === 'amount' ? (
+                  <span className="text-xs font-medium text-teal-600 whitespace-nowrap">
                     Copied!
                   </span>
+                ) : (
+                  <button
+                    onClick={() => handleCopy(amount, 'amount')}
+                    className="flex items-center justify-center w-8 h-8 transition-colors"
+                  >
+                    <CopyIcon className="w-4 h-4 text-nova" />
+                  </button>
                 )}
               </div>
             </div>

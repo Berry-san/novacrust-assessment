@@ -61,7 +61,7 @@ export function ConversionWidget() {
     console.log(data);
 
     try {
-      router.push(`/deposit-page`);
+      router.push(`/confirmation`);
     } catch (error) {
       setIsLoading(false);
     }
